@@ -19,8 +19,22 @@ class _QuizState extends State<Quiz> {
   
   Elem activeScreen cemo koristiti dole kao vrednost za child, jer child SAMO ZELI WIDGET, a activeScreen sadrzi widget */
   // var activeScreen = const StartScreen();
-  Widget activeScreen = const StartScreen(switchScreen);
-  // prosledjujuci fn switchScreen u StartScreen, sada mozemo da koristimo tu fn u StartScreen kad god
+  // Widget activeScreen = StartScreen(switchScreen);
+  Widget? activeScreen;
+  //! dodajemo ? na Widget da ukazemo da activeScreen moze biti i null jer inicijalno ono nema value, vec joj se sa initState dodaje value
+
+  /* prosledjujuci fn switchScreen u StartScreen, sada mozemo da koristimo tu fn u StartScreen kad god
+  PORDVUCENO switchScreen kao error:
+  ! Error: The instance member 'switchScreen' can't be accessed in an initializer. Try replacing the reference to the instance member with a different expression
+  ? Why: Both the variable & method creation happens at the same point of time (ie., simultaneously); When the class is instantiated
+  Dakle taj error dobijamo jer koristimo switchScreen fn kada inicijalizujemo activeScreen varijablu, a to se desava istovremeno kad i taj metod void switchScreen() {...} kreiran. Dakle koristimo switchScreen prerano, pre engo sto smo ga kreirali jelte. Odnosno kada se klasa _QuizState pretvori u objekat
+  * Resenje: dodajemo built-in metod initState(). To je emtod koji je provajdiran ovom State<Quiz> klasom koju extendujemo, ali mozemo je overrideovati koristeci neku nasu initialisation logiku. Ovo je metod koji inace zelimo da dodamo u nase State klase da odradi neki extra initialization work kada je taj State object kreiran for the first time  */
+
+  @override
+  void initState() {
+    activeScreen = StartScreen(switchScreen);
+    super.initState();
+  }
 
   void switchScreen() {
     setState(() {
