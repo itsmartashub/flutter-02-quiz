@@ -20,10 +20,13 @@ class StartScreen extends StatelessWidget {
               color: Color.fromARGB(255, 205, 239, 248),
             )),
         const SizedBox(height: 30),
-        OutlinedButton(
-            onPressed: () => {},
+        OutlinedButton.icon(
+            onPressed: () {},
             style: OutlinedButton.styleFrom(foregroundColor: Colors.white),
-            child: const Text('Start Quiz'))
+            icon: const Icon(Icons.arrow_right_alt),
+            label: const Text('Start Quiz'))
+        //! kada koristimo .icon na btn, child vise nije child vec label!
+        // child: const Text('Start Quiz'))
       ],
     ));
   }
