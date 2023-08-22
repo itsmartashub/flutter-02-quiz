@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/answer_button.dart';
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({super.key});
@@ -14,13 +15,16 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     return SizedBox(
       width: double.infinity,
       child: Column(
-        /* novi nacin za centriranje kontenta. Ako se koristi u Column on vertikalno centrira jer su u Columnu sadrzaj jedan ispod drugog, a ako se koristi u Row() onda horizontalno centrira jer je tu sadrzaj jedan pored drugog, dakle u zavisnosti od MAIN AXIC-a se vrsi centriranje.
-        MainAxisAlignment ima vrednosti kao flexbox u css, .spaceBetween, .spaceAround, .spaceEvenly */
+        /* novi nacin za centriranje kontenta. Ako se koristi u Column on vertikalno centrira jer su u Columnu sadrzaj jedan ispod drugog, a ako se koristi u Row() onda horizontalno centrira jer je tu sadrzaj jedan pored drugog, dakle u zavisnosti od MAIN AXIS-a se vrsi centriranje.
+        * - MainAxisAlignment ima vrednosti kao flexbox u css, .spaceBetween, .spaceAround, .spaceEvenly */
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('The question...'),
+          const Text('The question...',
+              style: TextStyle(
+                color: Colors.white,
+              )),
           const SizedBox(height: 20),
-          ElevatedButton(
+          /* ElevatedButton(
             onPressed: () {},
             child: const Text('Answer 1'),
           ),
@@ -31,7 +35,13 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
           ElevatedButton(
             onPressed: () {},
             child: const Text('Answer 3'),
-          ),
+          ), */
+          //? sa position argument; order vazan
+          // AnswerButton('Answer text', () {}),
+          //? sa named argument; order nevazan
+          AnswerButton(onTap: () {}, answerText: 'Answer text 1'),
+          AnswerButton(onTap: () {}, answerText: 'Answer text 2'),
+          AnswerButton(onTap: () {}, answerText: 'Answer text 3'),
         ],
       ),
     );
