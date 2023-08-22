@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/answer_button.dart';
 import 'package:quiz_app/data/questions.dart';
-import 'package:quiz_app/models/quiz_question.dart';
+// import 'package:quiz_app/models/quiz_question.dart';
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({super.key});
@@ -43,9 +43,18 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
           //? sa position argument; order vazan
           // AnswerButton('Answer text', () {}),
           //? sa named argument; order nevazan
-          AnswerButton(onTap: () {}, answerText: currentQuestion.answers[0]),
+          /* AnswerButton(onTap: () {}, answerText: currentQuestion.answers[0]),
           AnswerButton(onTap: () {}, answerText: currentQuestion.answers[1]),
-          AnswerButton(onTap: () {}, answerText: currentQuestion.answers[2]),
+          AnswerButton(onTap: () {}, answerText: currentQuestion.answers[2]), */
+
+          /* ! ovo je podvuceno sve crvenim jer children: zeli Listu widgeta, a mi ovim map kreiramo novu Listu, Listu unutar Liste. zato moramo korisiti spread operator ...
+          ! Dakle ono sto spreading radi je pretvara neted listu (listu unutar liste) u jednu listu. NPR: [[1,2,3],4] u [1,2,3,4] */
+          ...currentQuestion.answers.map((answer) {
+            return AnswerButton(
+              onTap: () {},
+              answerText: answer,
+            );
+          })
         ],
       ),
     );
