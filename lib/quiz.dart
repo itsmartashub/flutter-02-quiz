@@ -18,18 +18,20 @@ class _QuizState extends State<Quiz> {
   ! I mi sad treba da ucinimo activeScreen malo manje restriktivnim, da moze da prihvata sve vrste tipova, a ne samo StartScreen. To cemo uraditi tako sto cemo var zameniti sa Widget.
   
   Elem activeScreen cemo koristiti dole kao vrednost za child, jer child SAMO ZELI WIDGET, a activeScreen sadrzi widget */
+
+//@ #NACIN I sa initState
+/* 
   // var activeScreen = const StartScreen();
   // Widget activeScreen = StartScreen(switchScreen);
-  Widget? activeScreen;
-  //! dodajemo ? na Widget da ukazemo da activeScreen moze biti i null jer inicijalno ono nema value, vec joj se sa initState dodaje value
 
   /* prosledjujuci fn switchScreen u StartScreen, sada mozemo da koristimo tu fn u StartScreen kad god
   PORDVUCENO switchScreen kao error:
   ! Error: The instance member 'switchScreen' can't be accessed in an initializer. Try replacing the reference to the instance member with a different expression
   ? Why: Both the variable & method creation happens at the same point of time (ie., simultaneously); When the class is instantiated
   Dakle taj error dobijamo jer koristimo switchScreen fn kada inicijalizujemo activeScreen varijablu, a to se desava istovremeno kad i taj metod void switchScreen() {...} kreiran. Dakle koristimo switchScreen prerano, pre engo sto smo ga kreirali jelte. Odnosno kada se klasa _QuizState pretvori u objekat
-  * Resenje: dodajemo built-in metod initState(). To je emtod koji je provajdiran ovom State<Quiz> klasom koju extendujemo, ali mozemo je overrideovati koristeci neku nasu initialisation logiku. Ovo je metod koji inace zelimo da dodamo u nase State klase da odradi neki extra initialization work kada je taj State object kreiran for the first time  */
-
+  * Resenje: dodajemo built-in metod initState(). To je emtod koji je provajdiran ovom State<Quiz> klasom koju extendujemo, ali mozemo je overrideovati koristeci neku nasu initialisation logiku. Ovo je metod koji inace zelimo da dodamo u nase State klase da odradi neki extra initialization work kada je taj State object kreiran for the first time
+  ! dodajemo ? na Widget da ukazemo da activeScreen moze biti i null jer inicijalno ono nema value, vec joj se sa initState dodaje value */
+  Widget? activeScreen;
   @override
   void initState() {
     activeScreen = StartScreen(switchScreen);
@@ -39,6 +41,16 @@ class _QuizState extends State<Quiz> {
   void switchScreen() {
     setState(() {
       activeScreen = const QuestionsScreen();
+    });
+  }
+*/
+
+//@ #NACIN II sa ternarnim operatorom
+  var activeScreen = 'start-screen';
+
+  void switchScreen() {
+    setState(() {
+      activeScreen = 'questions-screen';
     });
   }
 
@@ -56,7 +68,14 @@ class _QuizState extends State<Quiz> {
             Color.fromARGB(255, 116, 106, 211)
           ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
           // child: const StartScreen(),
-          child: activeScreen,
+
+          //? #NACIN I
+          // child: activeScreen,
+
+          //? #NACIN II
+          child: activeScreen == 'start-screen'
+              ? StartScreen(switchScreen)
+              : const QuestionsScreen(),
         ),
       ),
     );
