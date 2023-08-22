@@ -56,6 +56,12 @@ class _QuizState extends State<Quiz> {
 
   @override
   Widget build(context) {
+    Widget screenWidget = StartScreen(switchScreen);
+
+    if (activeScreen == 'questions-screen') {
+      screenWidget = const QuestionsScreen();
+    }
+
     return MaterialApp(
       // Scaffold se ugl koristi da se setuju podesavanja za SCREEN nase app (bg color itd)
       // Elem, a posto hocemo sad ovde gradient bg, koristicemo Container jr nam on omogucava da setujemo decoration na njega. I wrapovacemo ovaj StartScreen widget u njega jer zelimo da koristimo isti setup, isti screen bg color na svim screens koje cemo dodati. Zato ne stavljamo ovaj gradient na specific screen (kao recimo StartScreen), vec cemo StartScreen da wrapujemo
@@ -73,9 +79,10 @@ class _QuizState extends State<Quiz> {
           // child: activeScreen,
 
           //? #NACIN II
-          child: activeScreen == 'start-screen'
+          /* child: activeScreen == 'start-screen'
               ? StartScreen(switchScreen)
-              : const QuestionsScreen(),
+              : const QuestionsScreen(), */
+          child: screenWidget,
         ),
       ),
     );
