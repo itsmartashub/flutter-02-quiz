@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class StartScreen extends StatelessWidget {
   /* U quiz.dart u StartScreen smo prosledili kao parametar onu void startsQuiz fn, koju ovde prihvatamo i mozemo je nazvati kako god. Koristimo positional parametar tehniku.
@@ -28,10 +29,10 @@ class StartScreen extends StatelessWidget {
         Image.asset('assets/images/quiz-logo.png',
             width: 300, color: const Color.fromARGB(150, 255, 255, 255)),
         const SizedBox(height: 80),
-        const Text('Learn Flutter the fun way!',
-            style: TextStyle(
+        Text('Learn Flutter the fun way!',
+            style: GoogleFonts.lato(
               fontSize: 24,
-              color: Color.fromARGB(255, 205, 239, 248),
+              color: const Color.fromARGB(255, 205, 239, 248),
             )),
         const SizedBox(height: 30),
         OutlinedButton.icon(
