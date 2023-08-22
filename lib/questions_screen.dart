@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/answer_button.dart';
+import 'package:quiz_app/data/questions.dart';
+import 'package:quiz_app/models/quiz_question.dart';
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({super.key});
@@ -11,6 +13,8 @@ class QuestionsScreen extends StatefulWidget {
 class _QuestionsScreenState extends State<QuestionsScreen> {
   @override
   Widget build(context) {
+    final currentQuestion = questions[0];
+
     /* dodajemo SizedBox da bi nas Column tj content zauzimao citavu sirinu ekrana koliko god ona bila, to cemo odraditi sa double.infinity. To je special value koji znaci: use as much width as you can, as wide is possible */
     return SizedBox(
       width: double.infinity,
@@ -19,10 +23,10 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
         * - MainAxisAlignment ima vrednosti kao flexbox u css, .spaceBetween, .spaceAround, .spaceEvenly */
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('The question...',
-              style: TextStyle(
-                color: Colors.white,
-              )),
+          Text(
+            currentQuestion.text,
+            style: const TextStyle(color: Colors.white, fontSize: 22),
+          ),
           const SizedBox(height: 20),
           /* ElevatedButton(
             onPressed: () {},
@@ -39,9 +43,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
           //? sa position argument; order vazan
           // AnswerButton('Answer text', () {}),
           //? sa named argument; order nevazan
-          AnswerButton(onTap: () {}, answerText: 'Answer text 1'),
-          AnswerButton(onTap: () {}, answerText: 'Answer text 2'),
-          AnswerButton(onTap: () {}, answerText: 'Answer text 3'),
+          AnswerButton(onTap: () {}, answerText: currentQuestion.answers[0]),
+          AnswerButton(onTap: () {}, answerText: currentQuestion.answers[1]),
+          AnswerButton(onTap: () {}, answerText: currentQuestion.answers[2]),
         ],
       ),
     );
