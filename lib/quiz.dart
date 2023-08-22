@@ -19,7 +19,8 @@ class _QuizState extends State<Quiz> {
   
   Elem activeScreen cemo koristiti dole kao vrednost za child, jer child SAMO ZELI WIDGET, a activeScreen sadrzi widget */
   // var activeScreen = const StartScreen();
-  Widget activeScreen = const StartScreen();
+  Widget activeScreen = const StartScreen(switchScreen);
+  // prosledjujuci fn switchScreen u StartScreen, sada mozemo da koristimo tu fn u StartScreen kad god
 
   void switchScreen() {
     setState(() {
