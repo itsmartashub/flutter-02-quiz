@@ -14,7 +14,15 @@ class QuestionsSummary extends StatelessWidget {
           - Naime, stavili smo za Map value da bude Object, tako da Dart ne zna koji ce ovde biti tip i ne mozemo sabirati i ponasati se kao da je broj. Zato treba da type-castujemo sa as int. as se obicno koristi sa Map 
           ! Ali sad imamo drugi problem, a to je da Text() ne prihvata brojeve vec string, pa sad treba sve to da konvertujemo u String tako sto cemo sve to wrapovati i upotrebiti .toString() */
           children: [
-            Text(((data['question'] as int) + 1).toString()),
+            Text(((data['question_index'] as int) + 1).toString()),
+            Column(
+              children: [
+                Text(data['question'] as String),
+                const SizedBox(height: 5),
+                Text(data['user_answer'] as String),
+                Text(data['correct_answer'] as String),
+              ],
+            )
           ],
         );
       }).toList(),

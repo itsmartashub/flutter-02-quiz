@@ -68,7 +68,7 @@ class _QuizState extends State<Quiz> {
     Medjutim, i dalje imamo onaj error na kraju svih pitanja jer nismo resetovali selectedAnswers = [], tj ponovo na praznu listu. Za to treba ipak da uklonimo final iz te promenljive */
     if (selectedAnswers.length == questions.length) {
       setState(() {
-        selectedAnswers = [];
+        // selectedAnswers = []; //! vraticemo posle kad budemo restartovali kviz
         // activeScreen = 'start-screen';
         activeScreen = 'results-screen';
       });
