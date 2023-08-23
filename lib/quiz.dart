@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/start_screen.dart';
 import 'package:quiz_app/questions_screen.dart';
+import 'package:quiz_app/data/questions.dart'; // da bismo koristili questions
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
@@ -47,7 +48,8 @@ class _QuizState extends State<Quiz> {
 
 //@ #NACIN II sa ternarnim operatorom
   // final je jer ne planiramo da reassignujemo ovu varijablu, vec cemo samo dodavati nove elemente u listu
-  final List<String> selectedAnswers = [];
+  // final List<String> selectedAnswers = [];
+  List<String> selectedAnswers = [];
 
   var activeScreen = 'start-screen';
 
@@ -60,6 +62,15 @@ class _QuizState extends State<Quiz> {
   void chooseAnswer(String answer) {
     selectedAnswers.add(answer);
     // add() je built-in metod koji dodaje element u listu, bez da reassignuje varijablu vec reachuje tu list object u memoriji i dodaje novi item u taj object
+
+    /*  ako su isti, znamo onda da vise nemamo pitanja i onda treba da switchujemo na results screen, koji za sad nemamo, pa cemo za sad vratiti na pocetni screen sa setState i activeScreen = 'start-screen';
+    Medjutim, i dalje imamo onaj error na kraju svih pitanja jer nismo resetovali selectedAnswers = [], tj ponovo na praznu listu. Za to treba ipak da uklonimo final iz te promenljive */
+    if (selectedAnswers.length == questions.length) {
+      setState(() {
+        selectedAnswers = [];
+        activeScreen = 'start-screen';
+      });
+    }
   }
 
   @override
