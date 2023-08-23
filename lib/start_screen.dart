@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:google_fonts/google_fonts.dart'; // flutter pub add google_fonts
 
 class StartScreen extends StatelessWidget {
   /* U quiz.dart u StartScreen smo prosledili kao parametar onu void startsQuiz fn, koju ovde prihvatamo i mozemo je nazvati kako god. Koristimo positional parametar tehniku.

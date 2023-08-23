@@ -4,8 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_app/answer_button.dart';
 import 'package:quiz_app/data/questions.dart';
 
+/* 
+Treba da storujemo sve odgovore na koju je korisnik odg i treba da pokazemo drugaciji screen kada ispucamo sva pitanja. ALi gde to da uradimo? U quiz.dart */
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({super.key});
+  const QuestionsScreen({super.key, required this.onSelectedAnswer});
+
+  /* i ovde je kao problem sto nam je onSelectedAnswer dostupan u ovom QuestionsScreen u StatefulWidget, a nama treba u ovoj dole, _QuestionsScreenState. Dakle kako proslediti neki property iz Widget klase u State klasu? 
+  Za to nam je Flutter omogucio special widget propert koji se moze koristiti u State klasi. I taj widget property nam omogucava pristip widget klasi i njenim propertijima, npr onSelectedAnswer */
+  final void Function(String answer) onSelectedAnswer;
 
   @override
   State<QuestionsScreen> createState() => _QuestionsScreenState();
@@ -15,7 +21,10 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   // inicijalno treba da je 0, ali treba da se promeni svaki x kada se klikne odgovor na neko pitanje
   var currentQuestionIndex = 0;
 
-  void answerQuestion() {
+  void answerQuestion(String selectedAnswer) {
+    //* widget property nam omogucava pristip Widget klasi (QuestionsScreen) i njenim propertijima, npr onSelectedAnswer
+    widget.onSelectedAnswer(selectedAnswer);
+
     setState(() {
       // currentQuestionIndex = currentQuestionIndex + 1;
       // currentQuestionIndex += 1;
@@ -73,8 +82,10 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
             // ...currentQuestion.answers.map((answer) {
             ...currentQuestion.getShuffledAnswers().map((answer) {
               return AnswerButton(
-                onTap: answerQuestion,
                 answerText: answer,
+                onTap: () {
+                  answerQuestion(answer);
+                },
               );
             })
           ],
