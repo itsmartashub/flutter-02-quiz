@@ -58,11 +58,8 @@ class _QuizState extends State<Quiz> {
   }
 
   void chooseAnswer(String answer) {
-    // treba da apdejtujemo selectedAnswers, dakle koristimo setState()
-    setState(() {
-      selectedAnswers.add(answer);
-      // add() je built-in metod koji dodaje element u listu, bez da reassignuje varijablu vec reachuje tu list object u memoriji i dodaje novi item u taj object
-    });
+    selectedAnswers.add(answer);
+    // add() je built-in metod koji dodaje element u listu, bez da reassignuje varijablu vec reachuje tu list object u memoriji i dodaje novi item u taj object
   }
 
   @override
