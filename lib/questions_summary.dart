@@ -15,13 +15,19 @@ class QuestionsSummary extends StatelessWidget {
           ! Ali sad imamo drugi problem, a to je da Text() ne prihvata brojeve vec string, pa sad treba sve to da konvertujemo u String tako sto cemo sve to wrapovati i upotrebiti .toString() */
           children: [
             Text(((data['question_index'] as int) + 1).toString()),
-            Column(
-              children: [
-                Text(data['question'] as String),
-                const SizedBox(height: 5),
-                Text(data['user_answer'] as String),
-                Text(data['correct_answer'] as String),
-              ],
+
+            /* ? Expanded Widget
+            - Expanded zvuci kao da child-ovi zauzimaju sav prostor koji mogu, ali bez ovo Expanded Columns zauzimaju beskonacnu sirinu, i van ekrana. A expanded dozvoljava child-ovima da zauzimaju prostora koliko mogu u flex widgetu ili main axisu. flex widget za recimo ovo dole Column, bi bio ovaj Ro, a amax flex widget za Row bi bio koliko j max visina screen.
+            Dakle Extended se brine da child se ne siri dalje od parenta  */
+            Expanded(
+              child: Column(
+                children: [
+                  Text(data['question'] as String),
+                  const SizedBox(height: 5),
+                  Text(data['user_answer'] as String),
+                  Text(data['correct_answer'] as String),
+                ],
+              ),
             )
           ],
         );

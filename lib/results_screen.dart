@@ -34,25 +34,19 @@ class ResultsScreen extends StatelessWidget {
       width: double.infinity,
       child: Container(
         margin: const EdgeInsets.all(20),
-        /* ? Expanded Widget
-         - Expanded zvuci kao da child-ovi zauzimaju sav prostor koji mogu, ali bez ovo Expanded Columns zauzimaju beskonacnu sirinu, i van ekrana. A expanded dozvoljava child-ovima da zauzimaju prostora koliko mogu u flex widgetu ili main axisu. flex widget za recimo ovo dole Column, bi bio ovaj Ro, a amax flex widget za Row bi bio koliko j max visina screen.
-         Dakle Extended se brine da child se ne siri dalje od parenta  */
-        child: Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('You answered X out of Y questions correctly!'),
-              const SizedBox(height: 30),
-
-              // ovde ne saljemo getSummaryData kao naziv vec je pozivamo jer njeno pozivanje vraca listu Map-a
-              QuestionsSummary(getSummaryData()),
-              const SizedBox(height: 30),
-              TextButton(
-                onPressed: () {},
-                child: const Text('Restart Quiz'),
-              )
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('You answered X out of Y questions correctly!'),
+            const SizedBox(height: 30),
+            // ovde ne saljemo getSummaryData kao naziv vec je pozivamo jer njeno pozivanje vraca listu Map-a
+            QuestionsSummary(getSummaryData()),
+            const SizedBox(height: 30),
+            TextButton(
+              onPressed: () {},
+              child: const Text('Restart Quiz'),
+            )
+          ],
         ),
       ),
     );
