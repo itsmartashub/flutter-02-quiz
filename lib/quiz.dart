@@ -50,7 +50,7 @@ class _QuizState extends State<Quiz> {
 //@ #NACIN II sa ternarnim operatorom
   // final je jer ne planiramo da reassignujemo ovu varijablu, vec cemo samo dodavati nove elemente u listu
   // final List<String> selectedAnswers = [];
-  final List<String> _selectedAnswers = [];
+  List<String> _selectedAnswers = [];
 
   var activeScreen = 'start-screen';
 
@@ -75,6 +75,13 @@ class _QuizState extends State<Quiz> {
     }
   }
 
+  void restartQuiz() {
+    setState(() {
+      _selectedAnswers = [];
+      activeScreen = 'questions-screen';
+    });
+  }
+
   @override
   Widget build(context) {
     Widget screenWidget = StartScreen(switchScreen);
@@ -85,7 +92,10 @@ class _QuizState extends State<Quiz> {
     }
 
     if (activeScreen == 'results-screen') {
-      screenWidget = ResultsScreen(chosenAnswers: _selectedAnswers);
+      screenWidget = ResultsScreen(
+        chosenAnswers: _selectedAnswers,
+        onRestart: restartQuiz,
+      );
     }
 
     return MaterialApp(
