@@ -80,7 +80,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
             /* ! ovo je podvuceno sve crvenim jer children: zeli Listu widgeta, a mi ovim map kreiramo novu Listu, Listu unutar Liste. zato moramo korisiti spread operator ...
             ! Dakle ono sto spreading radi je pretvara neted listu (listu unutar liste) u jednu listu. NPR: [[1,2,3],4] u [1,2,3,4] */
             // ...currentQuestion.answers.map((answer) {
-            ...currentQuestion.getShuffledAnswers().map((answer) {
+            ...currentQuestion.shuffledAnswers.map((answer) {
               return AnswerButton(
                 answerText: answer,
                 onTap: () {

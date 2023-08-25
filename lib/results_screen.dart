@@ -12,7 +12,8 @@ class ResultsScreen extends StatelessWidget {
   Umesto ovog, alternativno bismo mogli da kreiramo novu klasu koje bi definsiala kako nas SummaryObject treba da izgleda, i onda bismo mogli da instanciramo nekoliko SummaryObjecta-a ovde (ja to kapiram kao componente sto su u Vue). I to je takodje dobro resenje, ali Max nam je hteo pokazati Map<K,V> i zato radi na ovaj nacin.
   
   Dakle getSummaryData treba da vrati Listu Map-a, */
-  List<Map<String, Object>> getSummaryData() {
+  // List<Map<String, Object>> getSummaryData() {
+  List<Map<String, Object>> get summaryData {
     final List<Map<String, Object>> summary = [];
 
     for (var i = 0; i < chosenAnswers.length; i++) {
@@ -30,11 +31,10 @@ class ResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final summaryData = getSummaryData();
     final numTotalQuestions = questions.length;
-    final numCorrectQuestions = summaryData.where((data) {
-      return data['user_answer'] == data['correct_answer'];
-    }).length;
+    final numCorrectQuestions = summaryData
+        .where((data) => data['user_answer'] == data['correct_answer'])
+        .length;
 
     return SizedBox(
       width: double.infinity,
